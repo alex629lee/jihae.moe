@@ -1,3 +1,4 @@
+
 (function () {
   var startingTime = new Date().getTime();
   // Load the script
@@ -22,12 +23,15 @@
     $(function () {
       var endingTime = new Date().getTime();
       var tookTime = endingTime - startingTime;
-      console.log("jQuery is loaded, after " + tookTime + " milliseconds!");
+      // console.log("jQuery is loaded, after " + tookTime + " milliseconds!");
     });
   });
 })();
 
-
+window.onload = window.onresize = () => {
+  var height = window.innerHeight;
+  document.body.style.height = height + "px";
+}
 
 const startjQuery = () => {
   const $ = window.jQuery;
