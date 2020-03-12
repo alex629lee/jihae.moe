@@ -11,6 +11,7 @@
   var checkReady = function (callback) {
     if (window.jQuery) {
       callback(jQuery);
+
       startjQuery();
     }
     else {
@@ -33,6 +34,16 @@ window.onload = window.onresize = () => {
   document.body.style.height = height + "px";
 }
 
+const debounce = (callback, mil) => {
+  let timer;
+  return () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      callback();
+    }, mil);
+  }
+}
+
 const startjQuery = () => {
   const $ = window.jQuery;
 
@@ -43,7 +54,7 @@ const startjQuery = () => {
   }, 300);
 
   let currButton = "projects";
-  document.getElementById("projects-button").addEventListener("click", () => {
+  document.getElementById("projects-button").onclick = debounce(() => {
     if (currButton === "projects") {
       goToProjects($);
       currButton = "socials";
@@ -53,15 +64,14 @@ const startjQuery = () => {
       currButton = "projects";
       document.getElementById("projects-button").innerHTML = `PROJECTS <i class="fas fa-chevron-right"></i>`
     }
-
-  });
+  }, 300);
 }
 
 const goToProjects = ($) => {
   $(".links-container").animate({
     right: "50",
     opacity: "0"
-  }, 500);
+  }, 400);
   setTimeout(() => {
     $(".links-container").css("display", "none");
     $(".projects-container").css({
@@ -74,15 +84,15 @@ const goToProjects = ($) => {
     $(".projects-container").animate({
       right: "0",
       opacity: "1"
-    }, 800);
-  }, 300);
+    }, 700);
+  }, 200);
 }
 
 const goToSocials = ($) => {
   $(".projects-container").animate({
     right: "-50",
     opacity: "0"
-  }, 500);
+  }, 400);
   setTimeout(() => {
     $(".projects-container").css("display", "none");
     $(".links-container").css({
@@ -95,6 +105,6 @@ const goToSocials = ($) => {
     $(".links-container").animate({
       right: "0",
       opacity: "1"
-    }, 800);
-  }, 300);
+    }, 700);
+  }, 200);
 }
