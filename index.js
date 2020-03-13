@@ -8,10 +8,9 @@
   document.getElementsByTagName("head")[0].appendChild(script);
 
   // Poll for jQuery to come into existance
-  var checkReady = function (callback) {
+  const checkReady = function (callback) {
     if (window.jQuery) {
       callback(jQuery);
-
       startjQuery();
     }
     else {
@@ -24,7 +23,6 @@
     $(function () {
       var endingTime = new Date().getTime();
       var tookTime = endingTime - startingTime;
-      // console.log("jQuery is loaded, after " + tookTime + " milliseconds!");
     });
   });
 })();
@@ -34,13 +32,14 @@ window.onload = window.onresize = () => {
   document.body.style.height = height + "px";
 }
 
-const debounce = (callback, mil) => {
-  let timer;
-  return () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      callback();
-    }, mil);
+
+const throttle = (func, limit) => {
+  let inThrottle
+  return (...args) => {
+    if (!inThrottle) {
+      func(...args)
+      inThrottle = setTimeout(() => inThrottle = false, limit)
+    }
   }
 }
 
@@ -54,7 +53,7 @@ const startjQuery = () => {
   }, 300);
 
   let currButton = "projects";
-  document.getElementById("projects-button").onclick = debounce(() => {
+  document.getElementById("projects-button").onclick = throttle(() => {
     if (currButton === "projects") {
       goToProjects($);
       currButton = "socials";
@@ -64,7 +63,7 @@ const startjQuery = () => {
       currButton = "projects";
       document.getElementById("projects-button").innerHTML = `PROJECTS <i class="fas fa-chevron-right"></i>`
     }
-  }, 300);
+  }, 500);
 }
 
 const goToProjects = ($) => {
