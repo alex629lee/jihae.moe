@@ -2,7 +2,8 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600,700,300i,600i,700i|Raleway:600,800");
 
 main {
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
+  background-attachment: scroll;
   background-image: url("https://raw.githubusercontent.com/alex629lee/jihae.moe/master/images/pixel-stars-gif.gif");
   background-repeat: repeat;
   backdrop-filter: grayscale(100%);
