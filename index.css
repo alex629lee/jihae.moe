@@ -93,11 +93,11 @@ main {
   font-family: 'Ubuntu Mono', sans-serif;
   position: relative;
   right: -50px;
-  height: 420px;
+  height: 400px;
 }
 
 .links-container {
-  height: 420px;
+  height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
